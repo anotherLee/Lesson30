@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by liyue2 (http://jsbin.com/pisekur/13/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="第三十课作业多色试验">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>JS Bin</title>
+  <style>
+    body{
+      margin:0;
+    }
+    .box{
+      width:100vw;
+      height:100vh;
+      background:#ff4d4d;
+    }
+    .words{
+      position:absolute;
+      transform:translate(-50%,-50%);
+      top:20px;
+      left:50%;
+    }
+    button{
+      position:fixed;
+      transform:translate(-50%,-50%);
+      left:50%;
+      top:50px;
+      border:1px solid blue;
+      border-radius:4px;
+      background:transparent;
+      cursor:pointer;
+    }
+    button:focus{
+      outline:none;
+    }
+  </style>
+</head>
+<body>
+    <div class=box></div>
+    <div class=words>写个字看看</div>
+    <button>重写</button>
+<script id="jsbin-javascript">
+let box = document.querySelector('.box')
+let button = document.querySelector('button')
+button.addEventListener('click',function(){
+  document.location.reload(true)
+})
+
+
+
+
+
+
+box.addEventListener('touchmove',function(e){
+  e.preventDefault()
+  let {pageX,pageY} = e.touches[0]
+  let div = document.createElement('div')
+  document.body.appendChild(div)
+  div.style.position = 'absolute'  //这里要注意，定位不能写在下面，不然就会被盖住，JS是一行一行读的
+  div.style.left = pageX + 'px'
+  div.style.top = pageY + 'px'
+  div.style.width = '8px'
+  div.style.height = '8px'
+  div.style.borderRadius = '3px'
+//   div.style.background = 'black'
+  
+  
+  timeId = setInterval(function(){
+   let r = parseInt(Math.random()*255)
+   let g = parseInt(Math.random()*255)
+   let b = parseInt(Math.random()*255)
+   div.style.background = 'rgb('+r+','+g+','+b+')'
+  },200)
+  
+})
+
+
+
+// box.addEventListener('touchend',function(){
+//   console.log('摸完了')
+//   clearInterval(timeId)
+// })
+</script>
+</body>
+</html>
